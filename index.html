@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>kbc game</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.main{
+			height: 100vh;
+			width: 100vw;
+		}
+		nav{
+			width: 100vw;
+			background: linear-gradient(black,blue);
+		}
+		nav ul{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		nav ul li{
+			padding: 12px 12px 0px 12px;
+			list-style: none;
+			font-size: 22px;
+			font-weight:bold;
+		}
+		.cont{
+			position: absolute;
+			top: 150px;
+			left: 450px;
+		}
+		.cont p{
+			text-align: center;
+			font-size: 42px;
+			font-weight: bold;
+		}
+		.option_field{
+			margin-top: 23px;
+			text-align: center;
+		}
+		.option_field button{
+			padding: 20px 18px 8px 20px;
+			margin: 12px;
+			border-radius:5px;
+		}
+		#select{
+			display: none;
+		}
+
+		#show_result{
+			display: none;
+		}
+
+		#show_wrong_result{
+			display: none;
+		}
+
+		@media(min-width:0px) and (max-width:150px){
+			nav{
+				font-size: 12px;
+				text-align: center;
+				width: 470px;
+			}
+
+			nav ul li{
+				font-size: 12px;
+			}
+			.cont p{
+				font-size: 10px;
+				font-weight: bold;
+			}
+
+			.option_field{
+				display: flex;
+			}
+
+			.cont{
+				position: absolute;
+				left: 20px;
+			}
+		}
+
+
+		@media(min-width:150px) and (max-width:200px){
+
+			nav{
+				font-size: 12px;
+				text-align: center;
+				width: 800px;
+			}
+
+			nav ul li{
+				font-size: 12px;
+			}
+			.cont p{
+				font-size: 10px;
+				font-weight: bold;
+			}
+
+			.option_field{
+				display: flex;
+			}
+			
+			.cont{
+				position: absolute;
+				left: 160px;
+			}
+		}
+
+		@media(min-width:200px) and (max-width:300px){
+			nav{
+				font-size: 12px;
+				text-align: center;
+				width: 800px;
+			}
+
+			.cont p{
+				font-size: 15px;
+				font-weight: bold;
+			}
+
+			.option_field{
+				display: flex;
+			}
+
+			.cont{
+				position: absolute;
+				left: 30px;
+			}
+		}
+
+		@media(min-width:300px) and (max-width:500px){
+			nav{
+				font-size: 12px;
+				text-align: center;
+				width: 800px;
+			}
+
+			.cont p{
+				font-size: 15px;
+				font-weight: bold;
+			}
+
+			.option_field{
+				display: flex;
+			}
+
+			.cont{
+				position: absolute;
+				left: 160px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<nav>
+		<h1 style="text-align: center; color:white; font-size:28px;"> Physics quiz</h1>
+			<ul>
+				<li>Home</li>
+				<li>About</li>
+				<li>contact</li>
+			</ul>
+		</nav>
+		<div class="cont">
+			<p class="question_field" style="color:red;">question appear here</p>
+			<div class="option_field">
+				<button class="option_1 option" style="font-size:20px;" id="1"><h2>option_1</h2></button>
+				<button class="option_2 option" style="font-size:20px;" id="2"><h2>option_2</h2></button>
+				<button class="option_3 option" style="font-size:20px;" id="3"><h2>option_3</h2></button>
+				<button class="option_4 option" style="font-size:20px;" id="4"><h2>option_4</h2></button>
+			</div>
+			<button id="select" style="padding:12px 20px 5px 22px; font-size: 23px; margin-top: 23px; color: orange;"></button>
+			<!-- <button id="sub" style="padding:12PX 22px 3px 12px; background: lightblue;"><h1>submit</h1></button> -->
+			<button id="show_result" style="margin-top: 45px; background:green;padding:12PX 22px 3px 12px; font-size:23px; color: white;"></button>
+			<button id="show_wrong_result" style="margin-top: 45px; background: red;padding:12PX 22px 3px 12px; font-size:23px; color: whitesmoke;"></button>
+			<button id="next" style="padding:12px 12px 12px 22px"><h2>Next Question</h2></button>
+
+		</div>
+	</div>
+	<script type="text/javascript">
+		let cons=0;
+		const question=[
+			["what is the SI unit of velocity ?","m/s","m/min","sec","det"],
+			["what do you mean by acceleration ?","change in velocity per unit time","distance covered per unit time","change in displacement per unit time","negative distanct per unit second"],
+			["what is the workdone by a force of 2N in displacing a body by 2m in the direction of force ?","4j","6j","8j","48j"],
+			["High energy physics deal with the:","stydy of electron behavior","study of electronic charges","study of mechanics of energetic bodies","study of properties and behaviour of elementary particles"],
+			["physics can be defined as a branch of a science based on a:","Aberration and analysis of facts","Experimental observation and quantitive mesurement","Mathematical calculation and interpretation","Replication and verification of known facts"],
+			["The equation of motion v=u+at can be applied in which of following cases ?","simple harmonic motion","circular motion","when acceleration is constant","Both b and c"],
+			["Power of lens is measured in which of the following units ?","metre","dioptre","lumen","watt"],
+			["The force per unit charge is known as ____","Electric current","Electric potential","Electric field","Electric space"],
+			["The SI unit of magnetic flux is ","Dyne","Tesla","Weber","ohm"]
+			]
+		let show_question=()=>{
+			let quesfi=document.querySelector('.question_field');
+			quesfi.innerHTML=question[cons][0];
+			let opt=document.querySelectorAll('.option');
+			Array.from(opt).forEach((e,ind)=>{
+				e.innerHTML=question[cons][ind+1];
+			})
+			cons+=1;
+		}
+		show_question();
+		    if (document.getElementsByClassName('question_field')[0].innerHTML=="what is the SI unit of velocity ?") {
+				let opts=document.querySelectorAll('.option');
+				Array.from(opts).forEach((e,ind)=>{
+					e.addEventListener('click',()=>{
+						if(e.innerHTML=="m/s"){
+							document.getElementById('show_wrong_result').style.display="none";
+							document.getElementById('show_result').style.display="block";
+							document.getElementById('show_result').innerHTML="the answer given by you is correct";
+							console.log(document.getElementsByClassName('question_field')[0].innerHTML);
+						}else{
+							document.getElementById('show_result').style.display="none";
+							document.getElementById('show_wrong_result').style.display="block";
+							document.getElementById('show_wrong_result').innerHTML="the answer given by you is incorrect X";
+						}
+					})
+				})	
+			}
+		
+				document.getElementById('next').addEventListener('click',()=>{
+				document.getElementById('show_result').style.display='none';
+				document.getElementById('show_wrong_result').style.display='none';
+				let show_ques=()=>{
+			let quesfi=document.querySelector('.question_field');
+			quesfi.innerHTML=question[cons][0];
+			let opt=document.querySelectorAll('.option');
+			Array.from(opt).forEach((e,ind)=>{
+				e.innerHTML=question[cons][ind+1];
+			})
+			cons+=1;
+		}
+		show_ques();
+		if (cons==2) {
+		console.log(velocity());
+	}
+		if (cons==3) {
+	    console.log(forcedis());
+	}
+
+		if (cons==4) {
+		console.log(energy());
+	}
+
+		if (cons==5) {
+		console.log(stu_phy());
+	}
+
+		if (cons==6) {
+		console.log(v_u());
+	}
+
+	 if (cons==7) {
+		console.log(pol());
+	}
+
+		if(cons==8){
+		console.log(fpuc());
+	}
+
+	if (cons==9) {
+		console.log(suomf());
+	}
+		})
+
+		    function velocity(){
+				let opts=document.querySelectorAll('.option');
+				Array.from(opts).forEach((e,ind)=>{
+					e.addEventListener('click',()=>{
+						if(e.innerHTML=="change in velocity per unit time"){
+							document.getElementById('show_wrong_result').style.display="none";
+							document.getElementById('show_result').style.display="block";
+							document.getElementById('show_result').innerHTML="the answer given by you is correct";
+						}else{
+							document.getElementById('show_result').style.display="none";
+							document.getElementById('show_wrong_result').style.display="block";
+							document.getElementById('show_wrong_result').innerHTML="the answer given by you is incorrect X";
+						}
+					})
+				})
+				return "velocities";	
+			}
+
+			function forcedis(){
+				let opts=document.querySelectorAll('.option');
+				Array.from(opts).forEach((e,ind)=>{
+					e.addEventListener('click',()=>{
+						if(e.innerHTML=="4j"){
+							document.getElementById('show_wrong_result').style.display="none";
+							document.getElementById('show_result').style.display="block";
+							document.getElementById('show_result').innerHTML="the answer given by you is correct";
+						}else{
+							document.getElementById('show_result').style.display="none";
+							document.getElementById('show_wrong_result').style.display="block";
+							document.getElementById('show_wrong_result').innerHTML="the answer given by you is incorrect X";
+						}
+					})
+				})
+				return "forcedis";
+		    }
+
+		    function energy(){
+		    	let opts=document.querySelectorAll('.option');
+				Array.from(opts).forEach((e,ind)=>{
+					e.addEventListener('click',()=>{
+						if(e.innerHTML=="study of properties and behaviour of elementary particles"){
+							document.getElementById('show_wrong_result').style.display="none";
+							document.getElementById('show_result').style.display="block";
+							document.getElementById('show_result').innerHTML="the answer given by you is correct";
+						}else{
+							document.getElementById('show_result').style.display="none";
+							document.getElementById('show_wrong_result').style.display="block";
+							document.getElementById('show_wrong_result').innerHTML="the answer given by you is incorrect X";
+						}
+					})
+				})
+				return "energy";
+		    }
+
+		    function stu_phy(){
+		    	let opts=document.querySelectorAll('.option');
+				Array.from(opts).forEach((e,ind)=>{
+					e.addEventListener('click',()=>{
+						if(e.innerHTML=="Experimental observation and quantitive mesurement"){
+							document.getElementById('show_wrong_result').style.display="none";
+							document.getElementById('show_result').style.display="block";
+							document.getElementById('show_result').innerHTML="the answer given by you is correct";
+						}else{
+							document.getElementById('show_result').style.display="none";
+							document.getElementById('show_wrong_result').style.display="block";
+							document.getElementById('show_wrong_result').innerHTML="the answer given by you is incorrect X";
+						}
+					})
+				})
+				return "studyphysics";
+				}
+
+		   function v_u(){
+		   	let opts=document.querySelectorAll('.option');
+				Array.from(opts).forEach((e,ind)=>{
+					e.addEventListener('click',()=>{
+						if(e.innerHTML=="when acceleration is constant"){
+							document.getElementById('show_wrong_result').style.display="none";
+							document.getElementById('show_result').style.display="block";
+							document.getElementById('show_result').innerHTML="the answer given by you is correct";
+						}else{
+							document.getElementById('show_result').style.display="none";
+							document.getElementById('show_wrong_result').style.display="block";
+							document.getElementById('show_wrong_result').innerHTML="the answer given by you is incorrect X";
+						}
+					})
+				})
+				return "v_u";
+		   }
+
+		   function pol(){
+		   	let opts=document.querySelectorAll('.option');
+				Array.from(opts).forEach((e,ind)=>{
+					e.addEventListener('click',()=>{
+						if(e.innerHTML=="dioptre"){
+							document.getElementById('show_wrong_result').style.display="none";
+							document.getElementById('show_result').style.display="block";
+							document.getElementById('show_result').innerHTML="the answer given by you is correct";
+						}else{
+							document.getElementById('show_result').style.display="none";
+							document.getElementById('show_wrong_result').style.display="block";
+							document.getElementById('show_wrong_result').innerHTML="the answer given by you is incorrect X";
+						}
+					})
+				})
+				return"pol";
+		   }
+
+		   function fpuc(){
+		   	let opts=document.querySelectorAll('.option');
+				Array.from(opts).forEach((e,ind)=>{
+					e.addEventListener('click',()=>{
+						if(e.innerHTML=="Electric field"){
+							document.getElementById('show_wrong_result').style.display="none";
+							document.getElementById('show_result').style.display="block";
+							document.getElementById('show_result').innerHTML="the answer given by you is correct";
+						}else{
+							document.getElementById('show_result').style.display="none";
+							document.getElementById('show_wrong_result').style.display="block";
+							document.getElementById('show_wrong_result').innerHTML="the answer given by you is incorrect X";
+						}
+					})
+				})
+				return "fpuc";
+		   }
+
+		   function suomf() {
+		   	let opts=document.querySelectorAll('.option');
+				Array.from(opts).forEach((e,ind)=>{
+					e.addEventListener('click',()=>{
+						if(e.innerHTML=="Weber"){
+							document.getElementById('show_wrong_result').style.display="none";
+							document.getElementById('show_result').style.display="block";
+							document.getElementById('show_result').innerHTML="the answer given by you is correct";
+						}else{
+							document.getElementById('show_result').style.display="none";
+							document.getElementById('show_wrong_result').style.display="block";
+							document.getElementById('show_wrong_result').innerHTML="the answer given by you is incorrect X";
+						}
+					})
+				})
+				return "suomf";
+		   }
+</script>
+</body>
+</html>
